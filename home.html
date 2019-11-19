@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Thunderstruck</title>
+    </head>
+<body>
+    <div id='vueapp'>
+    
+        <h1>Cadastro de Contatos</h1>
+
+        <form>
+            <label>Nome</label>
+            <input type="text" name="nome" v-model="contatoForm.nome">
+            <label>Telefone</label>
+            <input type="text" name="telefone" v-model="contatoForm.telefone">
+            <label>Email</label>
+            <input type="email" name="email" v-model="contatoForm.email">
+            <input type="button" @click="criarContato()" value="Salvar">
+        </form>
+
+        <br><br>
+
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+            </tr>
+            <tr v-for='contato in contatoTable'>
+                <td>{{ contato.nome }}</td>
+                <td>{{ contato.telefone }}</td>
+                <td>{{ contato.email }}</td>
+            </tr>
+        </table>
+
+    </div>
+    <script>
+    var app = new Vue({
+        el: '#vueapp',
+        data: {
+            contatoForm: {},
+            contatoTable: []
+        },
+        methods: {
+            criarContato: function(){
+                app.contatoTable.push(app.contatoForm);
+                app.contatoForm = {};
+            }
+        }
+    })
+    </script>
+</body>
+</html>
