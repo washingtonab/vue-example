@@ -24,15 +24,16 @@
         <br><br>
 
         <table>
-            <tr>
+            <!--<tr>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>
-            </tr>
-            <tr v-for='contato in contatoTable'>
+            </tr>-->
+            <tr v-for="contato in contatoTable" :key="contato.id">
                 <td>{{ contato.nome }}</td>
                 <td>{{ contato.telefone }}</td>
                 <td>{{ contato.email }}</td>
+                <td><input type="button" @click="apagarContato(contato.id)" value="Apagar"></td>
             </tr>
         </table>
 
@@ -46,8 +47,15 @@
         },
         methods: {
             criarContato: function(){
+                app.contatoForm.id = app.contatoTable.length+1;
                 app.contatoTable.push(app.contatoForm);
                 app.contatoForm = {};
+            },
+            apagarContato: function(id){
+                var contatosFiltered =  app.contatoTable.filter(function(contato) {
+                    return contato.id != id;
+                });
+                app.contatoTable = contatosFiltered;
             }
         }
     })
